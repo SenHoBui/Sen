@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Service — Discord Music Bot</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+          },
+          colors: {
+            blurple: {
+              300: '#FBCFE8',
+              400: '#FB7185',
+              500: '#E85D75',
+              600: '#D64560',
+              700: '#BE334D',
+            },
+            discord: {
+              950: '#171114',
+              900: '#21181D',
+              800: '#2B1F26',
+              700: '#382831',
+              600: '#47333E',
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    body {
+      font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    .toc-link.active {
+      color: #D64560;
+      border-left-color: #E85D75;
+      background-color: rgba(232, 93, 117, 0.12);
+      font-weight: 600;
+    }
+    .dark .toc-link.active {
+      color: #FDA4AF;
+      border-left-color: #FB7185;
+      background-color: rgba(251, 113, 133, 0.18);
+    }
+    mark.search-hit {
+      background-color: rgba(250, 204, 21, 0.35);
+      color: inherit;
+      border-radius: 3px;
+      padding: 0 2px;
+    }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: #ffffff !important; color: #111827 !important; }
+      section { break-inside: avoid; border-color: #e5e7eb !important; background: #ffffff !important; }
+    }
+  </style>
+</head>
+<body class="bg-rose-50/70 text-slate-800 dark:bg-discord-950 dark:text-rose-50/90 antialiased min-h-screen transition-colors duration-200">
+
+  <!-- Top Navigation -->
+  <header class="no-print sticky top-0 z-30 border-b border-rose-200/70 dark:border-rose-200/10 bg-white/85 dark:bg-discord-900/90 backdrop-blur-md">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-3 min-w-0">
+        <div class="w-9 h-9 rounded-xl bg-blurple-500 text-white flex items-center justify-center shadow-md shadow-blurple-500/25 shrink-0">
+          <i data-lucide="music" class="w-5 h-5"></i>
+        </div>
+        <div class="min-w-0">
+          <div class="flex items-center gap-2">
+            <span class="font-bold text-slate-900 dark:text-white truncate text-sm sm:text-base" data-field="botName">Your Music Bot</span>
+            <span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-medium bg-blurple-500/15 text-blurple-600 dark:text-blurple-400">Terms of Service</span>
+          </div>
+          <p class="text-xs text-slate-500 dark:text-slate-400 truncate">GitHub Pages Legal Document</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 shrink-0">
+        <button id="btnCustomize" type="button" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs sm:text-sm font-medium bg-blurple-500 hover:bg-blurple-600 text-white transition-colors shadow-sm">
+          <i data-lucide="sliders-horizontal" class="w-4 h-4"></i>
+          <span>Customize</span>
+        </button>
+        <button id="btnGithubGuide" type="button" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs sm:text-sm font-medium border border-rose-200/80 dark:border-rose-200/15 bg-white dark:bg-discord-800 hover:bg-slate-100 dark:hover:bg-discord-700 text-slate-700 dark:text-slate-200 transition-colors">
+          <i data-lucide="github" class="w-4 h-4"></i>
+          <span class="hidden md:inline">GitHub Pages Guide</span>
+        </button>
+        <button id="btnDownload" type="button" title="Download standalone index.html for GitHub Pages" class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs sm:text-sm font-medium border border-rose-200/80 dark:border-rose-200/15 bg-white dark:bg-discord-800 hover:bg-slate-100 dark:hover:bg-discord-700 text-slate-700 dark:text-slate-200 transition-colors">
+          <i data-lucide="download" class="w-4 h-4"></i>
+          <span class="hidden sm:inline">Export HTML</span>
+        </button>
+        <button id="btnTheme" type="button" aria-label="Toggle color theme" class="p-2 rounded-lg border border-rose-200/80 dark:border-rose-200/15 bg-white dark:bg-discord-800 hover:bg-slate-100 dark:hover:bg-discord-700 text-slate-700 dark:text-slate-200 transition-colors">
+          <i id="themeIcon" data-lucide="sun" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Banner -->
+  <div class="border-b border-rose-200/70 dark:border-rose-200/10 bg-gradient-to-b from-pink-300/25 via-rose-200/10 to-transparent dark:from-blurple-500/20 dark:via-pink-400/5 dark:to-transparent">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-blurple-500/15 text-blurple-600 dark:text-blurple-400 border border-blurple-500/20 mb-4">
+          <i data-lucide="shield-check" class="w-3.5 h-3.5"></i>
+          <span>Discord Bot Legal Documentation</span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-3">
+          Terms of Service
+        </h1>
+        <p class="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed mb-6">
+          Please read these Terms of Service carefully before inviting, configuring, or using
+          <strong class="text-slate-900 dark:text-white" data-field="botName">Your Music Bot</strong>
+          on Discord. By adding or interacting with the Bot, you agree to be bound by these terms.
+        </p>
+
+        <!-- Metadata Pills -->
+        <div class="flex flex-wrap items-center gap-3 text-xs sm:text-sm">
+          <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white dark:bg-discord-800 border border-rose-200/70 dark:border-rose-200/10 text-slate-600 dark:text-slate-300">
+            <i data-lucide="calendar" class="w-4 h-4 text-blurple-500"></i>
+            <span>Effective Date: <strong class="text-slate-900 dark:text-white" data-field="effectiveDate">November 26, 2026</strong></span>
+          </div>
+          <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white dark:bg-discord-800 border border-rose-200/70 dark:border-rose-200/10 text-slate-600 dark:text-slate-300">
+            <i data-lucide="user-cog" class="w-4 h-4 text-blurple-500"></i>
+            <span>Operator: <strong class="text-slate-900 dark:text-white" data-field="ownerName">Bot Developer / Team</strong></span>
+          </div>
+          <div class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white dark:bg-discord-800 border border-rose-200/70 dark:border-rose-200/10 text-slate-600 dark:text-slate-300">
+            <i data-lucide="git-branch" class="w-4 h-4 text-blurple-500"></i>
+            <span data-field="githubRepoLabel">github.com/your-username/music-bot-tos</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content Layout -->
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+      <!-- Left Sidebar: Search + Sticky TOC -->
+      <aside class="no-print lg:col-span-4 xl:col-span-3 lg:sticky lg:top-24 space-y-4">
+        <!-- Search Box -->
+        <div class="p-3.5 rounded-2xl bg-white dark:bg-discord-800 border border-rose-200/70 dark:border-rose-200/10 shadow-sm">
+          <label for="tosSearch" class="sr-only">Search terms</label>
+          <div class="relative">
+            <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"></i>
+            <input id="tosSearch" type="text" placeholder="Search clauses (e.g. DMCA, voice)..." class="w-full pl-9 pr-8 py-2 text-sm rounded-xl bg-slate-100 dark:bg-discord-900 border border-transparent focus:border-blurple-500 focus:bg-white dark:focus:bg-discord-950 text-slate-900 dark:text-white placeholder-slate-400 outline-none transition-colors" />
+            <button id="btnClearSearch" type="button" aria-label="Clear search" class="hidden absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+              <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+          </div>
+          <p id="searchStatus" class="hidden mt-2 text-xs text-slate-500 dark:text-slate-400"></p>
+        </div>
+
+        <!-- Table of Contents -->
+        <nav aria-label="Table of contents" class="p-4 rounded-2xl bg-white dark:bg-discord-800 border border-rose-200/70 dark:border-rose-200/10 shadow-sm">
+          <div class="flex items-center justify-between mb-3">
+            <h2 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Contents</h2>
+            <button id="btnPrint" type="button" class="text-xs font-medium text-blurple-600 dark:text-blurple-400 hover:underline inline-flex items-center gap-1">
+              <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+              <span>Print</span>
+            </button>
+          </div>
+          <ul id="tocList" class="space-y-0.5 text-sm">
+            <li><a href="#acceptance" class="toc-link block py-1.5 px-3 border-l-2 border-transparent rounded-r-lg text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5 transition-colors">1. Acceptance of Terms</a></li>
+            <li><a href="#service" class="toc-link block py-1.5 px-3 border-l-2 border-transparent rounded-r-lg text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5 transition-colors">2. Description of Service</a></li>
+            <li><a href="#eligibility" class="toc-link block py-1.5 px-3 border-l-2 border-transparent rounded-r-lg text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5 transition-colors">3. Eligibility &amp; Authorization</a></li>
+            <li><a href="#conduct" class="toc-link block py-1.5 px-3 border-l-2 border-transparent rounded-r-lg text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5 transition-colors">4. Acceptable Use</a></li>
+            <li><a href="#third-party" class="toc-link block py-1.5 px-3 border-l-2 border-transparent rounded-r-lg text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5 transition-colors">5. Third-Party Audio Sources</a></li>
+            <li><a href="#copyright" class="toc-link block py-1.5 px-3 border-l-2 border-transparent rounded-r-lg text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5 transition-colors">6. Intellectual Property &amp; DMCA</a></li>
+            <li><a href="#privacy" class="toc-link block py-1.5 px-3 border-l-2 border-transparent rounded-r-lg text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5 transition-colors">7. Data &amp; Privacy Overview</a></li>
+            <li><a href="#availability" class="toc-link block py-1.5 px-3 border-l-2 border-transparent rounded-r-lg text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5 transition-colors">8. Availability &amp; Termination</a></li>
+            <li><a href="#liability" class="toc-link block py-1.5 px-3 border-l-2 border-transparent rounded-r-lg text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5 transition-colors">9. Disclaimers &amp; Liability</a></li>
+            <li><a href="#changes" class="toc-link block py-1.5 px-3 border-l-2 border-transparent rounded-r-lg text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5 transition-colors">10. Changes to Terms</a></li>
+            <li><a href="#contact" class="toc-link block py-1.5 px-3 border-l-2 border-transparent rounded-r-lg text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5 transition-colors">11. Contact Information</a></li>
+          </ul>
+        </nav>
+
+        <!-- Quick Actions Card -->
+        <div class="p-4 rounded-2xl bg-blurple-500/10 border border-blurple-500/20 text-xs text-slate-600 dark:text-slate-300 space-y-2.5">
+          <p class="font-semibold text-slate-900 dark:text-white flex items-center gap-1.5">
+            <i data-lucide="sparkles" class="w-4 h-4 text-blurple-500"></i>
+            <span>Ready for GitHub Pages</span>
+          </p>
+          <p class="leading-relaxed">Click <strong>Customize</strong> to replace the placeholder bot details, then click <strong>Export HTML</strong> to download your standalone <code>index.html</code>.</p>
+          <button id="btnCopyMarkdown" type="button" class="w-full inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-white dark:bg-discord-800 border border-rose-200/70 dark:border-rose-200/10 hover:bg-slate-50 dark:hover:bg-discord-700 text-slate-700 dark:text-slate-200 font-medium transition-colors">
+            <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+            <span>Copy as Markdown (TOS.md)</span>
+          </button>
+        </div>
+      </aside>
+
+      <!-- Right Column: Terms of Service Document -->
+      <main id="tosDocument" class="lg:col-span-8 xl:col-span-9 space-y-6">
+
+        <!-- Key Highlights Summary -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div class="p-4 rounded-2xl bg-white dark:bg-discord-800 border border-rose-200/70 dark:border-rose-200/10">
+            <div class="w-8 h-8 rounded-lg bg-pink-400/20 text-pink-600 dark:text-pink-300 flex items-center justify-center mb-2.5">
+              <i data-lucide="headphones" class="w-4 h-4"></i>
+            </div>
+            <h3 class="text-sm font-semibold text-slate-900 dark:text-white mb-1">No Voice Recording</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">The Bot streams audio into voice channels and does not record or store user voice conversations.</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-white dark:bg-discord-800 border border-rose-200/70 dark:border-rose-200/10">
+            <div class="w-8 h-8 rounded-lg bg-blurple-500/15 text-blurple-600 dark:text-blurple-400 flex items-center justify-center mb-2.5">
+              <i data-lucide="scale" class="w-4 h-4"></i>
+            </div>
+            <h3 class="text-sm font-semibold text-slate-900 dark:text-white mb-1">Discord Compliant</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">All usage must comply with Discord's Terms of Service and Community Guidelines.</p>
+          </div>
+          <div class="p-4 rounded-2xl bg-white dark:bg-discord-800 border border-rose-200/70 dark:border-rose-200/10">
+            <div class="w-8 h-8 rounded-lg bg-rose-400/20 text-rose-600 dark:text-rose-300 flex items-center justify-center mb-2.5">
+              <i data-lucide="copyright" class="w-4 h-4"></i>
+            </div>
+            <h3 class="text-sm font-semibold text-slate-900 dark:text-white mb-1">Third-Party Media</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">Audio tracks remain the property of their respective owners and external platforms.</p>
+          </div>
+        </div>
+
+        <!-- Empty Search State -->
+        <div id="emptySearchState" class="hidden p-10 rounded-2xl bg-white dark:bg-discord-800 border border-rose-200/70 dark:border-rose-200/10 text-center">
+          <i data-lucide="search-x" class="w-8 h-8 text-slate-400 mx-auto mb-3"></i>
+          <h3 class="text-base font-semibold text-slate-900 dark:text-white mb-1">No matching clauses found</h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400">Try a different keyword like "music", "copyright", "data", or "termination".</p>
+        </div>
+
+        <!-- Section 1 -->
+        <section id="acceptance" class="tos-section scroll-mt-24 p-6 sm:p-8 rounded-2xl bg-white dark:bg-discord-800 border border-rose-200/70 dark:border-rose-200/10 shadow-sm">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="w-7 h-7 rounded-lg bg-blurple-500/15 text-blurple-600 dark:text-blurple-400 text-xs font-bold flex items-center justify-center shrink-0">01</span>
+            <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">Acceptance of Terms</h2>
+          </div>
+          <div class="space-y-3 text-sm sm:text-[15px] leading-relaxed text-slate-600 dark:text-slate-300">
+            <p>
+              These Terms of Service ("Terms") govern your access to and use of
+              <strong class="text-slate-900 dark:text-white" data-field="botName">Your Music Bot</strong>
+              ("the Bot"), operated by <strong class="text-slate-900 dark:text-white" data-field="ownerName">Bot Developer / Team</strong> ("Operator", "we", "us", or "our").
+            </p>
+            <p>
+              By inviting the Bot to a Discord server, executing slash commands or message commands, or otherwise interacting with its features, you confirm that you have read, understood, and agree to be bound by these Terms, as well as Discord's Terms of Service and Community Guidelines. If you do not agree to these Terms, you must stop using the Bot and remove it from your server.
+            </p>
+          </div>
+        </section>
+
+        <!-- Section 2 -->
+        <section id="service" class="tos-section scroll-mt-24 p-6 sm:p-8 rounded-2xl bg-white dark:bg-discord-800 border border-rose-200/70 dark:border-rose-200/10 shadow-sm">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="w-7 h-7 rounded-lg bg-blurple-500/15 text-blurple-600 dark:text-blurple-400 text-xs font-bold flex items-center justify-center shrink-0">02</span>
+            <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">Description of Service</h2>
+          </div>
+          <div class="space-y-3 text-sm sm:text-[15px] leading-relaxed text-slate-600 dark:text-slate-300">
+            <p>
+              <strong class="text-slate-900 dark:text-white" data-field="botName">Your Music Bot</strong> provides real-time audio playback and queue management inside Discord voice channels, including features such as:
+            </p>
+            <ul class="list-disc pl-5 space-y-1.5">
+              <li>Streaming audio tracks requested by server members into active Discord voice channels.</li>
+              <li>Managing playback queues, track skipping, looping, volume controls, and audio filters.</li>
+              <li>Supporting server-level configuration such as DJ roles, text-channel restrictions, and playback preferences.</li>
+            </ul>
+            <p>
+              Features may evolve over time. We do not guarantee uninterrupted uptime, specific audio bitrates, or permanent compatibility with any external music platform.
+            </p>
+          </div>
+        </section>
+
+        <!-- Section 3 -->
+        <section id="eligibility" class="tos-section scroll-mt-24 p-6 sm:p-8 rounded-2xl bg-white dark:bg-discord-800 border border-rose-200/70 dark:border-rose-200/10 shadow-sm">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="w-7 h-7 rounded-lg bg-blurple-500/15 text-blurple-600 dark:text-blurple-400 text-xs font-bold flex items-center justify-center shrink-0">03</span>
+            <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">Eligibility &amp; Server Authorization</h2>
+          </div>
+          <div class="space-y-3 text-sm sm:text-[15px] leading-relaxed text-slate-600 dark:text-slate-300">
+            <p>
+              You must meet the minimum age required to use Discord in your country or jurisdiction (at least 13 years old, or older where required by local law) to use the Bot.
+            </p>
+            <p>
+              If you add the Bot to a Discord server, you represent that you have the necessary administrative permissions ("Manage Server" or equivalent) to authorize the Bot and configure its permissions on behalf of that server.
+            </p>
+          </div>
+        </section>
+
+        <!-- Section 4 -->
+        <section id="conduct" class="tos-section scroll-mt-24 p-6 sm:p-8 rounded-2xl bg-white dark:bg-discord-800 border border-rose-200/70 dark:border-rose-200/10 shadow-sm">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="w-7 h-7 rounded-lg bg-blurple-500/15 text-blurple-600 dark:text-blurple-400 text-xs font-bold flex items-center justify-center shrink-0">04</span>
+            <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">Acceptable Use &amp; Prohibited Conduct</h2>
+          </div>
+          <div class="space-y-3 text-sm sm:text-[15px] leading-relaxed text-slate-600 dark:text-slate-300">
+            <p>When using <strong class="text-slate-900 dark:text-white" data-field="botName">Your Music Bot</strong>, you agree that you will <strong>not</strong>:</p>
+            <ul class="list-disc pl-5 space-y-1.5">
+              <li>Spam commands, automate requests, or intentionally overload the Bot's audio servers or Discord API rate limits.</li>
+              <li>Use the Bot to stream unlawful, hateful, harassing, explicit, or otherwise prohibited audio content in violation of Discord's Community Guidelines.</li>
+              <li>Attempt to exploit bugs, bypass restrictions, reverse engineer, decompile, or disrupt the Bot's infrastructure.</li>
+              <li>Sell, rent, sublicense, or commercially redistribute access to the Bot without prior written permission from the Operator.</li>
+              <li>Use the Bot to download, record, or permanently redistribute copyrighted media files.</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Section 5 -->
+        <section id="third-party" class="tos-section scroll-mt-24 p-6 sm:p-8 rounded-2xl bg-white dark:bg-discord-800 border border-rose-200/70 dark:border-rose-200/10 shadow-sm">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="w-7 h-7 rounded-lg bg-blurple-500/15 text-blurple-600 dark:text-blurple-400 text-xs font-bold flex items-center justify-center shrink-0">05</span>
+            <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">Third-Party Services &amp; Audio Sources</h2>
+          </div>
+          <div class="space-y-3 text-sm sm:text-[15px] leading-relaxed text-slate-600 dark:text-slate-300">
+            <p>
+              The Bot operates on the Discord platform and may retrieve publicly available audio streams or metadata from supported third-party services at the direction of users.
+            </p>
+            <p>
+              <strong class="text-slate-900 dark:text-white" data-field="botName">Your Music Bot</strong> is not affiliated with, endorsed by, or sponsored by Discord Inc. or any third-party media platform. We do not host, store, or control third-party audio content, and we are not responsible for the availability, accuracy, or legality of external streams.
+            </p>
+          </div>
+        </section>
+
+        <!-- Section 6 -->
+        <section id="copyright" class="tos-section scroll-mt-24 p-6 sm:p-8 rounded-2xl bg-white dark:bg-discord-800 border border-rose-200/70 dark:border-rose-200/10 shadow-sm">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="w-7 h-7 rounded-lg bg-blurple-500/15 text-blurple-600 dark:text-blurple-400 text-xs font-bold flex items-center justify-center shrink-0">06</span>
+            <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">Intellectual Property &amp; Copyright (DMCA)</h2>
+          </div>
+          <div class="space-y-3 text-sm sm:text-[15px] leading-relaxed text-slate-600 dark:text-slate-300">
+            <p>
+              All rights, title, and interest in the Bot's source code (except where explicitly licensed under an open-source license on GitHub), branding, and documentation belong to <strong class="text-slate-900 dark:text-white" data-field="ownerName">Bot Developer / Team</strong>.
+            </p>
+            <p>
+              We respect the intellectual property rights of artists, labels, and content creators. All audio played through the Bot remains the property of its respective copyright holders. If you believe that content accessed through the Bot infringes your copyright, please contact us at
+              <a class="text-blurple-600 dark:text-blurple-400 hover:underline font-medium" data-field-href="emailHref" data-field="contactEmail" href="mailto:support@yourdomain.com">support@yourdomain.com</a>
+              with sufficient details to identify the material so we can investigate and restrict access where appropriate.
+            </p>
+          </div>
+        </section>
+
+        <!-- Section 7 -->
+        <section id="privacy" class="tos-section scroll-mt-24 p-6 sm:p-8 rounded-2xl bg-white dark:bg-discord-800 border border-rose-200/70 dark:border-rose-200/10 shadow-sm">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="w-7 h-7 rounded-lg bg-blurple-500/15 text-blurple-600 dark:text-blurple-400 text-xs font-bold flex items-center justify-center shrink-0">07</span>
+            <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">Data Handling &amp; Privacy Overview</h2>
+          </div>
+          <div class="space-y-3 text-sm sm:text-[15px] leading-relaxed text-slate-600 dark:text-slate-300">
+            <p>
+              To provide music playback and server settings, the Bot processes minimal operational data provided by Discord, which may include:
+            </p>
+            <ul class="list-disc pl-5 space-y-1.5">
+              <li>Discord Server (Guild) IDs, Voice/Text Channel IDs, and User IDs required to execute commands and enforce permissions.</li>
+              <li>Server preferences (such as default volume, DJ roles, or saved playlists if enabled) and temporary in-memory track queues.</li>
+              <li>Error logs used solely for debugging and preventing abuse.</li>
+            </ul>
+            <p>
+              The Bot does <strong>not</strong> record, transcribe, or store audio from Discord voice channels, and we do not sell user data to third parties. Server administrators may request deletion of stored server settings at any time by contacting us.
+            </p>
+          </div>
+        </section>
+
+        <!-- Section 8 -->
+        <section id="availability" class="tos-section scroll-mt-24 p-6 sm:p-8 rounded-2xl bg-white dark:bg-discord-800 border border-rose-200/70 dark:border-rose-200/10 shadow-sm">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="w-7 h-7 rounded-lg bg-blurple-500/15 text-blurple-600 dark:text-blurple-400 text-xs font-bold flex items-center justify-center shrink-0">08</span>
+            <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">Service Availability, Modifications &amp; Termination</h2>
+          </div>
+          <div class="space-y-3 text-sm sm:text-[15px] leading-relaxed text-slate-600 dark:text-slate-300">
+            <p>
+              We reserve the right to modify, suspend, or discontinue the Bot (or any individual feature) at any time, with or without prior notice, including for maintenance, hosting limits, or upstream API changes.
+            </p>
+            <p>
+              We may restrict, block, or terminate access to the Bot for any user or Discord server that violates these Terms, abuses system resources, or compromises the safety or stability of the service.
+            </p>
+          </div>
+        </section>
+
+        <!-- Section 9 -->
+        <section id="liability" class="tos-section scroll-mt-24 p-6 sm:p-8 rounded-2xl bg-white dark:bg-discord-800 border border-rose-200/70 dark:border-rose-200/10 shadow-sm">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="w-7 h-7 rounded-lg bg-blurple-500/15 text-blurple-600 dark:text-blurple-400 text-xs font-bold flex items-center justify-center shrink-0">09</span>
+            <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">Disclaimer of Warranties &amp; Limitation of Liability</h2>
+          </div>
+          <div class="space-y-3 text-sm sm:text-[15px] leading-relaxed text-slate-600 dark:text-slate-300">
+            <p>
+              THE BOT IS PROVIDED ON AN <strong>"AS IS"</strong> AND <strong>"AS AVAILABLE"</strong> BASIS WITHOUT WARRANTIES OF ANY KIND, WHETHER EXPRESS OR IMPLIED, INCLUDING IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT.
+            </p>
+            <p>
+              To the fullest extent permitted by applicable law, <strong class="text-slate-900 dark:text-white" data-field="ownerName">Bot Developer / Team</strong> shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of data, server disruption, or third-party service outage arising out of or related to your use of or inability to use the Bot.
+            </p>
+          </div>
+        </section>
+
+        <!-- Section 10 -->
+        <section id="changes" class="tos-section scroll-mt-24 p-6 sm:p-8 rounded-2xl bg-white dark:bg-discord-800 border border-rose-200/70 dark:border-rose-200/10 shadow-sm">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="w-7 h-7 rounded-lg bg-blurple-500/15 text-blurple-600 dark:text-blurple-400 text-xs font-bold flex items-center justify-center shrink-0">10</span>
+            <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">Changes to These Terms</h2>
+          </div>
+          <div class="space-y-3 text-sm sm:text-[15px] leading-relaxed text-slate-600 dark:text-slate-300">
+            <p>
+              We may update these Terms from time to time to reflect new features, Discord policy updates, or legal requirements. When changes are made, we will update the "Effective Date" at the top of this page. Your continued use of the Bot after updated Terms are posted constitutes acceptance of the revised Terms.
+            </p>
+          </div>
+        </section>
+
+        <!-- Section 11 -->
+        <section id="contact" class="tos-section scroll-mt-24 p-6 sm:p-8 rounded-2xl bg-white dark:bg-discord-800 border border-rose-200/70 dark:border-rose-200/10 shadow-sm">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="w-7 h-7 rounded-lg bg-blurple-500/15 text-blurple-600 dark:text-blurple-400 text-xs font-bold flex items-center justify-center shrink-0">11</span>
+            <h2 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">Contact Information</h2>
+          </div>
+          <div class="space-y-4 text-sm sm:text-[15px] leading-relaxed text-slate-600 dark:text-slate-300">
+            <p>If you have questions about these Terms, data deletion requests, or copyright notices, please reach out through any of the channels below:</p>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+              <a data-field-href="emailHref" href="mailto:support@yourdomain.com" class="p-3.5 rounded-xl bg-slate-50 dark:bg-discord-900 border border-rose-200/70 dark:border-rose-200/10 hover:border-blurple-500 transition-colors flex items-start gap-3">
+                <i data-lucide="mail" class="w-4 h-4 text-blurple-500 mt-0.5 shrink-0"></i>
+                <div class="min-w-0">
+                  <div class="text-xs font-semibold text-slate-500 dark:text-slate-400">Email</div>
+                  <div class="text-sm font-medium text-slate-900 dark:text-white truncate" data-field="contactEmail">support@yourdomain.com</div>
+                </div>
+              </a>
+              <a data-field-href="supportServerUrl" href="https://discord.gg/your-invite" target="_blank" rel="noopener noreferrer" class="p-3.5 rounded-xl bg-slate-50 dark:bg-discord-900 border border-rose-200/70 dark:border-rose-200/10 hover:border-blurple-500 transition-colors flex items-start gap-3">
+                <i data-lucide="message-circle" class="w-4 h-4 text-blurple-500 mt-0.5 shrink-0"></i>
+                <div class="min-w-0">
+                  <div class="text-xs font-semibold text-slate-500 dark:text-slate-400">Support Server</div>
+                  <div class="text-sm font-medium text-slate-900 dark:text-white truncate" data-field="supportServerLabel">discord.gg/your-invite</div>
+                </div>
+              </a>
+              <a data-field-href="githubRepoUrl" href="https://github.com/your-username/music-bot-tos" target="_blank" rel="noopener noreferrer" class="p-3.5 rounded-xl bg-slate-50 dark:bg-discord-900 border border-rose-200/70 dark:border-rose-200/10 hover:border-blurple-500 transition-colors flex items-start gap-3">
+                <i data-lucide="github" class="w-4 h-4 text-blurple-500 mt-0.5 shrink-0"></i>
+                <div class="min-w-0">
+                  <div class="text-xs font-semibold text-slate-500 dark:text-slate-400">GitHub Repository</div>
+                  <div class="text-sm font-medium text-slate-900 dark:text-white truncate" data-field="githubRepoLabel">github.com/your-username/music-bot-tos</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="pt-4 pb-8 text-center text-xs text-slate-500 dark:text-slate-400 space-y-1.5">
+          <p>&copy; <span id="footerYear">2026</span> <span data-field="ownerName">Bot Developer / Team</span>. All rights reserved.</p>
+          <p>Not affiliated with Discord Inc. This customizable template is provided for informational purposes and does not constitute formal legal advice.</p>
+        </footer>
+      </main>
+    </div>
+  </div>
+
+  <!-- Customize Bot Info Modal -->
+  <div id="customizeModal" class="no-print hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+    <div class="w-full max-w-lg rounded-2xl bg-white dark:bg-discord-800 border border-rose-200/70 dark:border-rose-200/10 shadow-2xl overflow-hidden">
+      <div class="px-6 py-4 border-b border-rose-200/70 dark:border-rose-200/10 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <i data-lucide="sliders-horizontal" class="w-4 h-4 text-blurple-500"></i>
+          <h2 class="text-base font-bold text-slate-900 dark:text-white">Customize Your Bot Details</h2>
+        </div>
+        <button id="btnCloseCustomize" type="button" aria-label="Close modal" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+      <form id="customizeForm" class="p-6 space-y-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label for="inputBotName" class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Discord Bot Name</label>
+            <input id="inputBotName" type="text" required class="w-full px-3 py-2 text-sm rounded-xl bg-slate-100 dark:bg-discord-900 border border-rose-200/70 dark:border-rose-200/10 text-slate-900 dark:text-white focus:border-blurple-500 outline-none" />
+          </div>
+          <div>
+            <label for="inputOwnerName" class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Developer / Team Name</label>
+            <input id="inputOwnerName" type="text" required class="w-full px-3 py-2 text-sm rounded-xl bg-slate-100 dark:bg-discord-900 border border-rose-200/70 dark:border-rose-200/10 text-slate-900 dark:text-white focus:border-blurple-500 outline-none" />
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label for="inputEmail" class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Contact / DMCA Email</label>
+            <input id="inputEmail" type="email" required class="w-full px-3 py-2 text-sm rounded-xl bg-slate-100 dark:bg-discord-900 border border-rose-200/70 dark:border-rose-200/10 text-slate-900 dark:text-white focus:border-blurple-500 outline-none" />
+          </div>
+          <div>
+            <label for="inputEffectiveDate" class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Effective Date</label>
+            <input id="inputEffectiveDate" type="text" required class="w-full px-3 py-2 text-sm rounded-xl bg-slate-100 dark:bg-discord-900 border border-rose-200/70 dark:border-rose-200/10 text-slate-900 dark:text-white focus:border-blurple-500 outline-none" />
+          </div>
+        </div>
+        <div>
+          <label for="inputSupportServer" class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">Discord Support Server URL</label>
+          <input id="inputSupportServer" type="url" required class="w-full px-3 py-2 text-sm rounded-xl bg-slate-100 dark:bg-discord-900 border border-rose-200/70 dark:border-rose-200/10 text-slate-900 dark:text-white focus:border-blurple-500 outline-none" />
+        </div>
+        <div>
+          <label for="inputGithubRepo" class="block text-xs font-semibold text-slate-600 dark:text-slate-300 mb-1">GitHub Repository URL</label>
+          <input id="inputGithubRepo" type="url" required class="w-full px-3 py-2 text-sm rounded-xl bg-slate-100 dark:bg-discord-900 border border-rose-200/70 dark:border-rose-200/10 text-slate-900 dark:text-white focus:border-blurple-500 outline-none" />
+        </div>
+        <div class="pt-2 flex items-center justify-between gap-3">
+          <button id="btnResetDefaults" type="button" class="text-xs font-medium text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white">Reset defaults</button>
+          <div class="flex items-center gap-2">
+            <button id="btnCancelCustomize" type="button" class="px-4 py-2 rounded-xl text-sm font-medium border border-rose-200/80 dark:border-rose-200/15 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-white/5">Cancel</button>
+            <button type="submit" class="px-4 py-2 rounded-xl text-sm font-semibold bg-blurple-500 hover:bg-blurple-600 text-white shadow-sm">Apply Changes</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- GitHub Pages Setup Guide Modal -->
+  <div id="githubModal" class="no-print hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+    <div class="w-full max-w-lg rounded-2xl bg-white dark:bg-discord-800 border border-rose-200/70 dark:border-rose-200/10 shadow-2xl overflow-hidden">
+      <div class="px-6 py-4 border-b border-rose-200/70 dark:border-rose-200/10 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <i data-lucide="github" class="w-4 h-4 text-blurple-500"></i>
+          <h2 class="text-base font-bold text-slate-900 dark:text-white">Host on GitHub Pages</h2>
+        </div>
+        <button id="btnCloseGithub" type="button" aria-label="Close modal" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+      <div class="p-6 space-y-4 text-sm text-slate-600 dark:text-slate-300">
+        <ol class="space-y-3">
+          <li class="flex gap-3">
+            <span class="w-6 h-6 rounded-full bg-blurple-500 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">1</span>
+            <div><strong class="text-slate-900 dark:text-white">Customize &amp; Export:</strong> Click <em>Customize</em> to enter your bot name, email, and links, then click <em>Export HTML</em> to download a clean <code>index.html</code>.</div>
+          </li>
+          <li class="flex gap-3">
+            <span class="w-6 h-6 rounded-full bg-blurple-500 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">2</span>
+            <div><strong class="text-slate-900 dark:text-white">Create a Public GitHub Repo:</strong> Create a new public repository (e.g., <code>music-bot-tos</code>) and upload <code>index.html</code> to the root folder.</div>
+          </li>
+          <li class="flex gap-3">
+            <span class="w-6 h-6 rounded-full bg-blurple-500 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">3</span>
+            <div><strong class="text-slate-900 dark:text-white">Enable GitHub Pages:</strong> Go to <em>Settings &rarr; Pages</em>, choose <em>Deploy from a branch</em>, select <code>main</code> / <code>(root)</code>, and save.</div>
+          </li>
+          <li class="flex gap-3">
+            <span class="w-6 h-6 rounded-full bg-blurple-500 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">4</span>
+            <div><strong class="text-slate-900 dark:text-white">Add to Discord Developer Portal:</strong> Copy your live URL (<code>https://&lt;username&gt;.github.io/&lt;repo&gt;/</code>) into <em>General Information &rarr; Terms of Service URL</em>.</div>
+          </li>
+        </ol>
+        <div class="pt-2 flex justify-end">
+          <button id="btnDoneGithub" type="button" class="px-4 py-2 rounded-xl text-sm font-semibold bg-blurple-500 hover:bg-blurple-600 text-white">Got it</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" role="status" aria-live="polite" class="no-print pointer-events-none fixed bottom-5 right-5 z-50 translate-y-4 opacity-0 transition-all duration-200 px-4 py-2.5 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-sm font-medium shadow-lg flex items-center gap-2">
+    <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 dark:text-emerald-600"></i>
+    <span id="toastMessage">Saved!</span>
+  </div>
+
+  <script>
+    (function () {
+      const STORAGE_KEY = 'discord_music_bot_tos_config_v1';
+      const DEFAULTS = {
+        botName: 'Your Music Bot',
+        ownerName: 'Bot Developer / Team',
+        contactEmail: 'support@yourdomain.com',
+        effectiveDate: 'November 26, 2026',
+        supportServerUrl: 'https://discord.gg/your-invite',
+        githubRepoUrl: 'https://github.com/your-username/music-bot-tos'
+      };
+
+      let config = { ...DEFAULTS };
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+          config = { ...DEFAULTS, ...JSON.parse(saved) };
+        }
+      } catch (e) {
+        // Ignore storage restrictions
+      }
+
+      function stripProtocol(url) {
+        return String(url || '').replace(/^https?:\/\//i, '').replace(/\/$/, '');
+      }
+
+      function applyConfig() {
+        const map = {
+          botName: config.botName,
+          ownerName: config.ownerName,
+          contactEmail: config.contactEmail,
+          effectiveDate: config.effectiveDate,
+          supportServerLabel: stripProtocol(config.supportServerUrl),
+          githubRepoLabel: stripProtocol(config.githubRepoUrl)
+        };
+        document.title = 'Terms of Service — ' + config.botName;
+        document.querySelectorAll('[data-field]').forEach(el => {
+          const key = el.getAttribute('data-field');
+          if (key in map) el.textContent = map[key];
+        });
+        document.querySelectorAll('[data-field-href]').forEach(el => {
+          const key = el.getAttribute('data-field-href');
+          if (key === 'emailHref') el.setAttribute('href', 'mailto:' + config.contactEmail);
+          if (key === 'supportServerUrl') el.setAttribute('href', config.supportServerUrl);
+          if (key === 'githubRepoUrl') el.setAttribute('href', config.githubRepoUrl);
+        });
+      }
+
+      let toastTimer = null;
+      function showToast(msg) {
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toastMessage');
+        toastMessage.textContent = msg;
+        toast.classList.remove('opacity-0', 'translate-y-4');
+        toast.classList.add('opacity-100', 'translate-y-0');
+        if (toastTimer) clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => {
+          toast.classList.add('opacity-0', 'translate-y-4');
+          toast.classList.remove('opacity-100', 'translate-y-0');
+        }, 2600);
+      }
+
+      // Theme toggle
+      const htmlEl = document.documentElement;
+      const btnTheme = document.getElementById('btnTheme');
+      function updateThemeIcon() {
+        const isDark = htmlEl.classList.contains('dark');
+        btnTheme.innerHTML = '<i data-lucide="' + (isDark ? 'sun' : 'moon') + '" class="w-4 h-4"></i>';
+        if (window.lucide) window.lucide.createIcons();
+      }
+      btnTheme.addEventListener('click', () => {
+        htmlEl.classList.toggle('dark');
+        try {
+          localStorage.setItem('tos_theme', htmlEl.classList.contains('dark') ? 'dark' : 'light');
+        } catch (e) {}
+        updateThemeIcon();
+      });
+      try {
+        const savedTheme = localStorage.getItem('tos_theme');
+        if (savedTheme === 'light') htmlEl.classList.remove('dark');
+      } catch (e) {}
+
+      // Customize modal
+      const customizeModal = document.getElementById('customizeModal');
+      const customizeForm = document.getElementById('customizeForm');
+      function openCustomize() {
+        document.getElementById('inputBotName').value = config.botName;
+        document.getElementById('inputOwnerName').value = config.ownerName;
+        document.getElementById('inputEmail').value = config.contactEmail;
+        document.getElementById('inputEffectiveDate').value = config.effectiveDate;
+        document.getElementById('inputSupportServer').value = config.supportServerUrl;
+        document.getElementById('inputGithubRepo').value = config.githubRepoUrl;
+        customizeModal.classList.remove('hidden');
+      }
+      function closeCustomize() {
+        customizeModal.classList.add('hidden');
+      }
+      document.getElementById('btnCustomize').addEventListener('click', openCustomize);
+      document.getElementById('btnCloseCustomize').addEventListener('click', closeCustomize);
+      document.getElementById('btnCancelCustomize').addEventListener('click', closeCustomize);
+      customizeModal.addEventListener('click', (e) => {
+        if (e.target === customizeModal) closeCustomize();
+      });
+      document.getElementById('btnResetDefaults').addEventListener('click', () => {
+        config = { ...DEFAULTS };
+        try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+        applyConfig();
+        openCustomize();
+        showToast('Reset to default values');
+      });
+      customizeForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        config = {
+          botName: document.getElementById('inputBotName').value.trim() || DEFAULTS.botName,
+          ownerName: document.getElementById('inputOwnerName').value.trim() || DEFAULTS.ownerName,
+          contactEmail: document.getElementById('inputEmail').value.trim() || DEFAULTS.contactEmail,
+          effectiveDate: document.getElementById('inputEffectiveDate').value.trim() || DEFAULTS.effectiveDate,
+          supportServerUrl: document.getElementById('inputSupportServer').value.trim() || DEFAULTS.supportServerUrl,
+          githubRepoUrl: document.getElementById('inputGithubRepo').value.trim() || DEFAULTS.githubRepoUrl
+        };
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(config)); } catch (err) {}
+        applyConfig();
+        closeCustomize();
+        showToast('Updated Terms of Service details');
+      });
+
+      // GitHub Pages Guide modal
+      const githubModal = document.getElementById('githubModal');
+      function openGithub() { githubModal.classList.remove('hidden'); }
+      function closeGithub() { githubModal.classList.add('hidden'); }
+      document.getElementById('btnGithubGuide').addEventListener('click', openGithub);
+      document.getElementById('btnCloseGithub').addEventListener('click', closeGithub);
+      document.getElementById('btnDoneGithub').addEventListener('click', closeGithub);
+      githubModal.addEventListener('click', (e) => {
+        if (e.target === githubModal) closeGithub();
+      });
+
+      // Escape key closes modals
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeCustomize();
+          closeGithub();
+        }
+      });
+
+      // Print
+      document.getElementById('btnPrint').addEventListener('click', () => {
+        window.print();
+      });
+
+      // Search filtering
+      const searchInput = document.getElementById('tosSearch');
+      const btnClearSearch = document.getElementById('btnClearSearch');
+      const searchStatus = document.getElementById('searchStatus');
+      const emptySearchState = document.getElementById('emptySearchState');
+      const sections = Array.from(document.querySelectorAll('.tos-section'));
+
+      function filterSections() {
+        const q = searchInput.value.trim().toLowerCase();
+        btnClearSearch.classList.toggle('hidden', q.length === 0);
+        let visibleCount = 0;
+        sections.forEach(sec => {
+          const match = !q || sec.textContent.toLowerCase().includes(q);
+          sec.classList.toggle('hidden', !match);
+          if (match) visibleCount++;
+        });
+        if (q) {
+          searchStatus.textContent = 'Showing ' + visibleCount + ' of ' + sections.length + ' sections';
+          searchStatus.classList.remove('hidden');
+        } else {
+          searchStatus.classList.add('hidden');
+        }
+        emptySearchState.classList.toggle('hidden', visibleCount > 0);
+      }
+      searchInput.addEventListener('input', filterSections);
+      btnClearSearch.addEventListener('click', () => {
+        searchInput.value = '';
+        filterSections();
+        searchInput.focus();
+      });
+
+      // Active TOC highlighting on scroll
+      const tocLinks = Array.from(document.querySelectorAll('.toc-link'));
+      function updateActiveToc() {
+        let currentId = sections[0] ? sections[0].id : '';
+        const scrollPos = window.scrollY + 140;
+        for (const sec of sections) {
+          if (!sec.classList.contains('hidden') && sec.offsetTop <= scrollPos) {
+            currentId = sec.id;
+          }
+        }
+        tocLinks.forEach(link => {
+          const isMatch = link.getAttribute('href') === '#' + currentId;
+          link.classList.toggle('active', isMatch);
+        });
+      }
+      window.addEventListener('scroll', updateActiveToc, { passive: true });
+
+      // Copy as Markdown
+      function buildMarkdown() {
+        const lines = [
+          '# Terms of Service — ' + config.botName,
+          '',
+          '**Effective Date:** ' + config.effectiveDate + '  ',
+          '**Operator:** ' + config.ownerName + '  ',
+          '**Repository:** ' + config.githubRepoUrl,
+          ''
+        ];
+        sections.forEach((sec, idx) => {
+          const heading = sec.querySelector('h2').textContent.trim();
+          lines.push('## ' + (idx + 1) + '. ' + heading);
+          lines.push('');
+          sec.querySelectorAll('p, li').forEach(node => {
+            const text = node.textContent.replace(/\s+/g, ' ').trim();
+            if (node.tagName === 'LI') {
+              lines.push('- ' + text);
+            } else {
+              lines.push(text);
+              lines.push('');
+            }
+          });
+          lines.push('');
+        });
+        return lines.join('\n').trim() + '\n';
+      }
+
+      document.getElementById('btnCopyMarkdown').addEventListener('click', () => {
+        const md = buildMarkdown();
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(md).then(() => {
+            showToast('Copied Terms of Service as Markdown');
+          }).catch(() => fallbackCopy(md));
+        } else {
+          fallbackCopy(md);
+        }
+      });
+
+      function fallbackCopy(text) {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try {
+          document.execCommand('copy');
+          showToast('Copied Terms of Service as Markdown');
+        } catch (e) {
+          showToast('Unable to copy automatically');
+        }
+        document.body.removeChild(ta);
+      }
+
+      // Export clean standalone index.html for GitHub Pages
+      document.getElementById('btnDownload').addEventListener('click', () => {
+        const docClone = document.documentElement.cloneNode(true);
+        // Remove editor-only controls in exported production HTML? Keep theme/search/print, bake in current config!
+        const scriptTags = docClone.querySelectorAll('script');
+        const lastScript = scriptTags[scriptTags.length - 1];
+        if (lastScript) {
+          lastScript.textContent = lastScript.textContent.replace(
+            /const DEFAULTS = \{[\s\S]*?\};/,
+            'const DEFAULTS = ' + JSON.stringify(config, null, 2) + ';'
+          );
+        }
+        const htmlContent = '<!DOCTYPE html>\n' + docClone.outerHTML;
+        const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'index.html';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+        showToast('Downloaded index.html for GitHub Pages');
+      });
+
+      // Init
+      applyConfig();
+      updateActiveToc();
+      updateThemeIcon();
+      if (window.lucide) window.lucide.createIcons();
+    })();
+  </script>
+</body>
+</html>
